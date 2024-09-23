@@ -5,6 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Stock Trading Wallet</title>
+     <style>
+        /* Prevent text selection */
+        body {
+            user-select: none; /* Standard syntax */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+        }
+        /* Prevent dragging of images */
+        img {
+            pointer-events: none;
+        }
+        /* Hide elements when right-clicked */
+        .no-save img {
+            pointer-events: none;
+        }
+        /* Example watermark */
+        .watermarked {
+            position: relative;
+            display: inline-block;
+        }
+        .watermarked::after {
+            content: '© YourSite';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+        }
+        /* Obfuscated text */
+        .obfuscated {
+            color: transparent;
+            background-color: transparent;
+        }
+    </style>
+
 </head>
 <body>
     <header>
@@ -106,6 +143,47 @@
         <p>&copy; 2024 Stock Trading Wallet</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js"></script> 
+     <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable keyboard shortcuts for saving (e.g., Ctrl+S)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                
+            }
+        });
+
+        // Disable text selection
+        document.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+        });
+
+        // Prevent drag-and-drop
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+        });
+
+        // Prevent copy-pasting
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            
+        });
+
+        // Prevent image saving using a canvas trick
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>
